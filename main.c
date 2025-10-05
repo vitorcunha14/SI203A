@@ -27,6 +27,34 @@ void exibeAgenda(){
 }
 
 
+void escreveAgenda(){
+    char nome[50];
+    int telefone;
+    char email[100];
+    char endereco[150];
+
+    printf("=== Cadastrar Contato ===\n");
+    printf("Nome: ");
+    scanf("%s", nome);
+    printf("Telefone: ");
+    scanf("%d", &telefone);
+    printf("Email: ");
+    scanf("%s", email);
+    printf("Endereco: ");
+    scanf("%s", endereco);
+
+    FILE *arq = fopen("agenda.txt", "a");
+    if(arq == NULL){
+        perror("Erro ao abrir o arquivo.\n");
+        return;
+    }
+    fprintf(arq, "\n");
+    fprintf(arq, "%s %d %s %s\n", nome, telefone, email, endereco);
+    fclose(arq);
+    printf("Contato cadastrado com sucesso!\n");
+}
+
+
 void exibeMenu(){
     printf("=== Menu de Contatos ===\n");
     printf("1 - Cadastrar contato\n");
@@ -49,6 +77,7 @@ int main() {
         switch(opcao){
             case 1:
                 printf("Cadastrar contato selecionado.\n");
+                escreveAgenda();
                 break;
             case 2:
                 printf("Buscar contatos selecionado.\n");

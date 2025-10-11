@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 // typedef struct{
 //     char nome[50];
@@ -54,6 +55,36 @@ void escreveAgenda(){
     printf("Contato cadastrado com sucesso!\n");
 }
 
+void buscaContato(){
+    char nomeBusca[50];
+    char nome[50];
+    int telefone;
+    char email[100];
+    char endereco[150];
+    int encontrado = 0;
+
+    printf("=== Buscar Contato ===\n");
+    printf("Digite o nome do contato que deseja buscar: ");
+    scanf("%s", nomeBusca);
+
+    FILE *arq = fopen("agenda.txt", "r");
+    if(arq == NULL){
+        perror("Erro ao abrir o arquivo.\n");
+        return;
+    }
+    while(fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF){
+        if(strcmp(nome, nomeBusca) == 0){
+            printf("Contato encontrado:\n");
+            printf("Nome: %s | Telefone: %d | Email: %s | Endereco: %s\n", nome, telefone, email, endereco);
+            encontrado = 1;
+            break;
+        }
+    }
+    if(!encontrado){
+        printf("Contato nao encontrado.\n");
+    }
+    fclose(arq);
+}
 
 void exibeMenu(){
     printf("=== Menu de Contatos ===\n");
@@ -81,6 +112,7 @@ int main() {
                 break;
             case 2:
                 printf("Buscar contatos selecionado.\n");
+                buscaContato();
                 break;
             case 3:
                 printf("Atualizar contato selecionado.\n");

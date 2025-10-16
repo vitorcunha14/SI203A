@@ -180,6 +180,27 @@ void buscaContato(){
     fclose(arq);
 }
 
+void contataContatos(){
+    FILE *arq = fopen("agenda.txt", "r");
+    if(arq == NULL){
+        perror("Erro ao abrir o arquivo.\n");
+        return;
+    }
+    int count = 0;
+    char nome[50];
+    int telefone;
+    char email[100];
+    char endereco[150];
+    while(fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF){
+        count++;
+    }
+    fclose(arq);
+    
+    printf("\n=== Consultar Total de Contatos ===\n");
+    printf("Total de contatos na agenda: %d\n", count);
+}
+
+
 void exibeMenu(){
     printf("=== Menu de Contatos ===\n");
     printf("1 - Cadastrar contato\n");
@@ -221,6 +242,7 @@ int main() {
                 break;
             case 6:
                 printf("Consultar total de contatos selecionado.\n");
+                contataContatos();
                 break;
             case 0:
                 printf("Saindo do programa.\n");

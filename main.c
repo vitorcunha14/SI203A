@@ -14,7 +14,7 @@ void exibeAgenda(){
     char email[100];
     char endereco[150];
 
-    printf("=== Agenda de Contatos ===\n");
+    printf("\n=== Agenda de Contatos ===\n");
     FILE *arq = fopen("agenda.txt", "r");
     if(arq == NULL){
         perror("Erro ao abrir o arquivo.\n");
@@ -34,7 +34,7 @@ void escreveAgenda(){
     char email[100];
     char endereco[150];
 
-    printf("=== Cadastrar Contato ===\n");
+    printf("\n=== Cadastrar Contato ===\n");
     printf("Nome: ");
     scanf("%s", nome);
     printf("Telefone: ");
@@ -57,7 +57,7 @@ void escreveAgenda(){
 
 void removeContato(){
     char nome[50];
-    printf("=== Remover Contato ===\n");
+    printf("\n=== Remover Contato ===\n");
     printf("Digite o nome do contato que deseja remover: ");
     scanf("%s", nome);
 
@@ -103,29 +103,77 @@ void removeContato(){
 
 void buscaContato(){
     char nomeBusca[50];
+    char telefoneBusca[15];
+    char emailBusca[100];
+    char enderecoBusca[150];
+    
     char nome[50];
     int telefone;
     char email[100];
     char endereco[150];
     int encontrado = 0;
 
-    printf("=== Buscar Contato ===\n");
-    printf("Digite o nome do contato que deseja buscar: ");
-    scanf("%s", nomeBusca);
+    int opcao;
+
+
+    printf("\n=== Buscar Contato ===\n");
+    printf("Escolha uma opcao: \n");
+    printf("1 - Buscar por nome\n");
+    printf("2 - Buscar por telefone\n");
+    printf("3 - Buscar por email\n");
+    printf("4 - Buscar por endereco\n");
+
+    printf("Escolha uma opcao: ");
+    scanf("%d", &opcao);
 
     FILE *arq = fopen("agenda.txt", "r");
     if(arq == NULL){
         perror("Erro ao abrir o arquivo.\n");
         return;
     }
-    while(fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF){
-        if(strcmp(nome, nomeBusca) == 0){
-            printf("Contato encontrado:\n");
-            printf("Nome: %s | Telefone: %d | Email: %s | Endereco: %s\n", nome, telefone, email, endereco);
-            encontrado = 1;
-            break;
+
+    if(opcao == 1){
+        printf("Digite o nome do contato: ");
+        scanf("%s", nomeBusca);
+        while(fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF){
+            if(strcmp(nome, nomeBusca) == 0){
+                printf("Contato encontrado: Nome: %s | Telefone: %d | Email: %s | Endereco: %s\n", nome, telefone, email, endereco);
+                encontrado = 1;
+            }
         }
+    } else if(opcao == 2){
+        printf("Digite o telefone do contato: ");
+        scanf("%s", telefoneBusca);
+        while(fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF){
+            char telefoneStr[15];
+            sprintf(telefoneStr, "%d", telefone);
+            if(strcmp(telefoneStr, telefoneBusca) == 0){
+                printf("Contato encontrado: Nome: %s | Telefone: %d | Email: %s | Endereco: %s\n", nome, telefone, email, endereco);
+                encontrado = 1;
+            }
+        }
+    } else if(opcao == 3){
+        printf("Digite o email do contato: ");
+        scanf("%s", emailBusca);
+        while(fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF){
+            if(strcmp(email, emailBusca) == 0){
+                printf("Contato encontrado: Nome: %s | Telefone: %d | Email: %s | Endereco: %s\n", nome, telefone, email, endereco);
+                encontrado = 1;
+            }
+        }
+    } else if(opcao == 4){
+        printf("Digite o endereco do contato: ");
+        scanf("%s", enderecoBusca);
+        while(fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF){
+            if(strcmp(endereco, enderecoBusca) == 0){
+                printf("Contato encontrado: Nome: %s | Telefone: %d | Email: %s | Endereco: %s\n", nome, telefone, email, endereco);
+                encontrado = 1;
+            }
+        }
+    } else {
+        printf("Opcao invalida.\n");
     }
+
     if(!encontrado){
         printf("Contato nao encontrado.\n");
     }

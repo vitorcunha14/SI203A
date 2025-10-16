@@ -55,6 +55,52 @@ void escreveAgenda(){
     printf("Contato cadastrado com sucesso!\n");
 }
 
+void removeContato(){
+    char nome[50];
+    printf("=== Remover Contato ===\n");
+    printf("Digite o nome do contato que deseja remover: ");
+    scanf("%s", nome);
+
+    FILE *arq = fopen("agenda.txt", "r");
+    if(arq == NULL){
+        perror("Erro ao abrir o arquivo.\n");
+        return;
+    }
+
+    FILE *temporario = fopen("temp.txt", "w");
+    if(temporario == NULL){
+        perror("Erro ao criar arquivo temporario.\n");
+        fclose(arq);
+        return;
+    }
+
+    char nomeArq[50];
+    int telefoneArq;
+    char emailArq[100];
+    char enderecoArq[150];
+    int encontrado = 0;
+
+    while(fscanf(arq, "%s %d %s %s", nomeArq, &telefoneArq, emailArq, enderecoArq) != EOF){
+        if(strcmp(nomeArq, nome) != 0){
+            fprintf(temporario, "%s %d %s %s\n", nomeArq, telefoneArq, emailArq, enderecoArq);
+        } else {
+            encontrado = 1;
+        }
+    }
+
+    fclose(arq);
+    fclose(temporario);
+
+    if(encontrado){
+        remove("agenda.txt");
+        rename("temp.txt", "agenda.txt");
+        printf("Contato removido com sucesso!\n");
+    } else {
+        remove("temp.txt");
+        printf("Contato nao encontrado.\n");
+    }
+}
+
 void buscaContato(){
     char nomeBusca[50];
     char nome[50];
@@ -119,6 +165,7 @@ int main() {
                 break;
             case 4:
                 printf("Deletar contato selecionado.\n");
+                removeContato();
                 break;
             case 5:
                 printf("\nListar todos os contatos selecionado.\n");

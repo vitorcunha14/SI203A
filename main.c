@@ -27,7 +27,6 @@ void exibeAgenda(){
 
 }
 
-
 void escreveAgenda(){
     char nome[50];
     int telefone;
@@ -53,6 +52,97 @@ void escreveAgenda(){
     fprintf(arq, "%s %d %s %s\n", nome, telefone, email, endereco);
     fclose(arq);
     printf("Contato cadastrado com sucesso!\n");
+}
+
+void menuAtualiza () {
+        printf("O que você quer atualizar ?\n");
+        printf("1 - Nome\n");
+        printf("2 - Telefone\n");
+        printf("3 - Email\n");
+        printf("4 - Endereco\n");
+        printf("0 - Sair\n");
+}
+void atualizaContato(){
+    // INCOMPLETO
+    char nome[50];
+    int telefone;
+    char email[100];
+    char endereco[150];
+    int linha;
+    int contador = 1;
+
+    char nomeNovo[50];
+    int telefoneNovo;
+    char emailNovo[100];
+    char enderecoNovo[150];
+
+
+    FILE *arq = fopen("agenda.txt", "r+");
+    if(arq == NULL){
+        perror("Erro ao abrir o arquivo\n");
+        return;
+    }
+
+    printf("\n=== Atualizar Contato ===\n");
+    while(fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF){
+        printf("%d - Nome: %s | Telefone: %d | Email: %s | Endereco: %s\n", contador, nome, telefone, email, endereco);
+        contador++;
+    }
+
+    printf("Escolha uma linha para atualizar: \n");
+    scanf("%d", &linha);
+
+
+    int opcao;
+    while(1){
+        menuAtualiza();
+        printf("\nEscolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        if (opcao == 1){
+            printf("Novo nome: ");
+            scanf("%s", nomeNovo);
+        }
+
+        if(opcao == 2){
+            printf("Novo telefone: ");
+            scanf("%d", &telefoneNovo);
+        }
+
+        if (opcao == 3){
+            printf("Novo email: ");
+            scanf("%s", email);
+        }
+
+        if(opcao == 4){
+            printf("Novo endereco: ");
+            scanf("%s", enderecoNovo);
+        }
+
+        if (opcao == 0){
+            printf ("Salvando as informacoes.\n");
+            break;
+        }
+
+        if (opcao < 0 && opcao > 4){
+            printf ("Opcao Invalida.\n");
+        }
+        printf("\n");        
+    }
+
+
+    rewind(arq);
+    contador = 1;
+
+    while(fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF){
+        if (linha == contador) {
+            fprintf(arq, "%s %d %s %s", nome, &telefone, email, endereco);
+        }
+        contador++;
+    }
+
+    fclose(arq);
+    printf("Linha %d atualizada com sucesso!\n", linha);
 }
 
 void removeContato(){
@@ -231,6 +321,7 @@ int main() {
                 break;
             case 3:
                 printf("Atualizar contato selecionado.\n");
+                atualizaContato();
                 break;
             case 4:
                 printf("Deletar contato selecionado.\n");

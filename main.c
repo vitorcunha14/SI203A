@@ -77,8 +77,14 @@ void atualizaContato(){
     char enderecoNovo[150];
 
 
-    FILE *arq = fopen("agenda.txt", "r+");
+    FILE *arq = fopen("agenda.txt", "r");
     if(arq == NULL){
+        perror("Erro ao abrir o arquivo\n");
+        return;
+    }
+
+    FILE *temp = fopen("temp.txt", "w");
+    if(temp == NULL){
         perror("Erro ao abrir o arquivo\n");
         return;
     }
@@ -92,6 +98,17 @@ void atualizaContato(){
     printf("Escolha uma linha para atualizar: \n");
     scanf("%d", &linha);
 
+    rewind(arq);
+    contador = 1;
+    while(fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF){
+        if (linha == contador){
+            strcpy(nomeNovo, nome);
+            telefoneNovo = telefone;
+            strcpy(emailNovo, email);
+            strcpy(enderecoNovo, endereco);
+        }
+        contador++;
+    }
 
     int opcao;
     while(1){
@@ -111,7 +128,7 @@ void atualizaContato(){
 
         if (opcao == 3){
             printf("Novo email: ");
-            scanf("%s", email);
+            scanf("%s", emailNovo);
         }
 
         if(opcao == 4){
@@ -136,12 +153,17 @@ void atualizaContato(){
 
     while(fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF){
         if (linha == contador) {
-            fprintf(arq, "%s %d %s %s", nome, &telefone, email, endereco);
+            fprintf(temp, "%s %d %s %s\n", nomeNovo, telefoneNovo, emailNovo, enderecoNovo);
+        }else{
+            fprintf(temp, "%s %d %s %s\n", nome, telefone, email, endereco);
         }
         contador++;
     }
 
     fclose(arq);
+    fclose(temp);
+
+    // Trocar o nome dos arquivos
     printf("Linha %d atualizada com sucesso!\n", linha);
 }
 

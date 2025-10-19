@@ -63,7 +63,6 @@ void menuAtualiza () {
         printf("0 - Sair\n");
 }
 void atualizaContato(){
-    // INCOMPLETO
     char nome[50];
     int telefone;
     char email[100];
@@ -163,7 +162,8 @@ void atualizaContato(){
     fclose(arq);
     fclose(temp);
 
-    // Trocar o nome dos arquivos
+    remove("agenda.txt");
+    rename("temp.txt", "agenda.txt");
     printf("Linha %d atualizada com sucesso!\n", linha);
 }
 

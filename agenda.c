@@ -15,7 +15,7 @@ void exibeAgenda() {
         return;
     }
 
-    while (fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF) {
+    while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF) {
         printf("Nome: %s | Telefone: %d | Email: %s | Endereco: %s\n", nome, telefone, email, endereco);
     }
 
@@ -30,20 +30,15 @@ void escreveAgenda() {
 
     printf("\n=== Cadastrar Contato ===\n");
 
-    getchar();
-
     printf("Nome: ");
-    scanf("%[^\n]", nome);
-    getchar(); 
+    scanf(" %[^\n]", nome);
     printf("Telefone: ");
     scanf("%d", &telefone);
     getchar(); 
     printf("Email: ");
-    scanf("%[^\n]", email);
-    getchar(); 
+    scanf(" %[^\n]", email);
     printf("Endereco: ");
-    scanf("%[^\n]", endereco);
-    getchar(); 
+    scanf(" %[^\n]", endereco);
 
     FILE *arq = fopen("agenda.txt", "a");
     if (arq == NULL) {
@@ -51,7 +46,7 @@ void escreveAgenda() {
         return;
     }
 
-    fprintf(arq, "%s %d %s %s\n", nome, telefone, email, endereco);
+    fprintf(arq, "%s;%d;%s;%s\n", nome, telefone, email, endereco);
     fclose(arq);
 
     printf("Contato cadastrado com sucesso!\n");
@@ -170,7 +165,7 @@ void removeContato() {
     char nome[50];
     printf("\n=== Remover Contato ===\n");
     printf("Digite o nome do contato: ");
-    scanf("%s", nome);
+    scanf(" %[^\n]", nome);
 
     FILE *arq = fopen("agenda.txt", "r");
     if (arq == NULL) {
@@ -189,9 +184,9 @@ void removeContato() {
     int telefoneArq;
     int encontrado = 0;
 
-    while (fscanf(arq, "%s %d %s %s", nomeArq, &telefoneArq, emailArq, enderecoArq) != EOF) {
+    while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nomeArq, &telefoneArq, emailArq, enderecoArq) != EOF) {
         if (strcmp(nomeArq, nome) != 0)
-            fprintf(temp, "%s %d %s %s\n", nomeArq, telefoneArq, emailArq, enderecoArq);
+            fprintf(temp, "%s;%d;%s;%s\n", nomeArq, telefoneArq, emailArq, enderecoArq);
         else
             encontrado = 1;
     }
@@ -218,6 +213,7 @@ void buscaContato() {
     printf("1 - Nome\n2 - Telefone\n3 - Email\n4 - Endereco\n");
     printf("Escolha: ");
     scanf("%d", &opcao);
+    getchar();
 
     FILE *arq = fopen("agenda.txt", "r");
     if (arq == NULL) {
@@ -227,14 +223,14 @@ void buscaContato() {
 
     if (opcao == 1) {
         printf("Nome: ");
-        scanf("%s", nomeBusca);
-        while (fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF)
+        scanf(" %[^\n]", nomeBusca);
+        while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF)
             if (strcmp(nome, nomeBusca) == 0)
                 printf("Encontrado: %s | %d | %s | %s\n", nome, telefone, email, endereco), encontrado = 1;
     } else if (opcao == 2) {
         printf("Telefone: ");
-        scanf("%s", telefoneBusca);
-        while (fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF) {
+        scanf(" %[^\n]", telefoneBusca);
+        while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF) {
             char telStr[15];
             sprintf(telStr, "%d", telefone);
             if (strcmp(telStr, telefoneBusca) == 0)
@@ -242,14 +238,14 @@ void buscaContato() {
         }
     } else if (opcao == 3) {
         printf("Email: ");
-        scanf("%s", emailBusca);
-        while (fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF)
+        scanf(" %[^\n]", emailBusca);
+        while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF)
             if (strcmp(email, emailBusca) == 0)
                 printf("Encontrado: %s | %d | %s | %s\n", nome, telefone, email, endereco), encontrado = 1;
     } else if (opcao == 4) {
         printf("Endereco: ");
-        scanf("%s", enderecoBusca);
-        while (fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF)
+        scanf(" %[^\n]", enderecoBusca);
+        while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF)
             if (strcmp(endereco, enderecoBusca) == 0)
                 printf("Encontrado: %s | %d | %s | %s\n", nome, telefone, email, endereco), encontrado = 1;
     }
@@ -271,7 +267,7 @@ void contataContatos() {
     char nome[50], email[100], endereco[150];
     int telefone;
 
-    while (fscanf(arq, "%s %d %s %s", nome, &telefone, email, endereco) != EOF)
+    while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF)
         count++;
 
     fclose(arq);

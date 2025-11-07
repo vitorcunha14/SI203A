@@ -1,19 +1,12 @@
-Teste 12345678 teste1@email.com Rua1
-Angelis 111112 angelisunicamp@gmail.com avenida24
-tst 0 000@gamil.com rua0
-corinthians 1910 mundial2012@sccp.com rua2012
-neymar 1234002132 neymar@ousadiaealegria@gamial.com nsei
-Hugo 234234 hugosouza@corinthians Ct
-Rodrigo Garro 234234 garro@corinthians Ct Pq Sao Jorge
-Memphis Depay 2354653 depay@corinthians.com Festas do Neymar
-Yuri Alberto 23445463 yuriartilheiro@corinthians.com Itaquera
-Matheuszinho 2343 bigode@corinthians.com Barbearia
-Gui Negao 2345563 negao@corinthians.com Ct Pq Sao Jorge
-Andre Carrillo 234543 jogaleve@corinthians.com Enfermaria do Ct
-Angel Romero 23542 romero@corinthians.com Itaquera
-Breno Bidon 234456 mucilon@corinthians.com Ct Pq Sao Jorge
-Jose Martinez 23446 martinez@corinthians.com Ct Pq Sao Jorge
-Talles Magno 2344235 tragico@corinthians.com Cadeia
-Raniele 234535 tomouamarelo@corinthians.com Itaquera
-Matheus Bidu 234325 bidu@corinthians.com Ct Pq Sao Jorge
-Gustavo Henrique 23432 poste@corinthians.com Itaquera
+Memphis Depay 2348543 depay@corinthians.com Casa de Influencer 
+Rodrigo Garro 43546745 garro@corinthians.com Tribunal
+Yuri Alberto 24545672 lindo@corinthians.com Ct Pq Sao Jorge
+Andre Carrillo 2348546 carrillo@corinthians.com Itaquera
+Matheuszinho 2345457 bigode@corinthians.com Barbearia 
+Breno Bidon 3425346 bidon@corinthians.com Itaquera
+Maycon 2345436 bagre@corinthians.com Ct Pq Sao Jorge
+Matheus Bidu 3456456 bidu@corinthians.com Selecao 
+Raniele 23454 rani@corinthians.com Barbearia
+Gustavo Henrique 345546 gh@corinthians.com Grande Area
+Joao Pedro 345462 choca@corinthians.com Itaquera
+Dorival Junior 345346 dj@corinthhians.com Guilhotina

@@ -1,12 +1,12 @@
-Memphis Depay 2348543 depay@corinthians.com Casa de Influencer 
-Rodrigo Garro 43546745 garro@corinthians.com Tribunal
-Yuri Alberto 24545672 lindo@corinthians.com Ct Pq Sao Jorge
-Andre Carrillo 2348546 carrillo@corinthians.com Itaquera
-Matheuszinho 2345457 bigode@corinthians.com Barbearia 
-Breno Bidon 3425346 bidon@corinthians.com Itaquera
-Maycon 2345436 bagre@corinthians.com Ct Pq Sao Jorge
-Matheus Bidu 3456456 bidu@corinthians.com Selecao 
-Raniele 23454 rani@corinthians.com Barbearia
-Gustavo Henrique 345546 gh@corinthians.com Grande Area
-Joao Pedro 345462 choca@corinthians.com Itaquera
-Dorival Junior 345346 dj@corinthhians.com Guilhotina
+Memphis Depay;2348543;depay@corinthians.com;Casa de Influencer
+Rodrigo Garro;43546745;garro@corinthians.com;Tribunal
+Yuri Alberto;24545672;lindo@corinthians.com;Ct Pq Sao Jorge
+Andre Carrillo;2348546;carrillo@corinthians.com;Itaquera
+Matheuszinho;2345457;bigode@corinthians.com;Barbearia
+Maycon;2345436;bagre@corinthians.com;Ct Pq Sao Jorge
+Matheus Bidu;3456456;bidu@corinthians.com;Selecao
+Raniele;23454;rani@corinthians.com;Barbearia
+Gustavo Henrique;345546;gh@corinthians.com;Grande Area
+Joao Pedro;345462;choca@corinthians.com;Itaquera
+Dorival Junior;345346;dj@corinthhians.com;Guilhotina
+Goleiro Cassio;20122012;mundialdeclubes2012@sccp.com;Cortinas arena

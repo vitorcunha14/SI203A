@@ -10,3 +10,4 @@ Gustavo Henrique;345546;gh@corinthians.com;Grande Area
 Joao Pedro;345462;choca@corinthians.com;Itaquera
 Dorival Junior;345346;dj@corinthhians.com;Guilhotina
 Goleiro Cassio;20122012;mundialdeclubes2012@sccp.com;Cortinas arena
+Talles Magno;235346;tragico@corinthians.com;Cadeia

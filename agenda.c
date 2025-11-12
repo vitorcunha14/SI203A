@@ -11,12 +11,13 @@ void exibeAgenda() {
     printf("\n=== Agenda de Contatos ===\n");
     FILE *arq = fopen("agenda.txt", "r");
     if (arq == NULL) {
-        perror("Erro ao abrir o arquivo.\n");
+        perror("erro ao abrir arquivo\n");
         return;
     }
 
+    // le cada contato do arquivo e exibe
     while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF) {
-        printf("Nome: %s | Telefone: %d | Email: %s | Endereco: %s\n", nome, telefone, email, endereco);
+        printf("nome: %s | telefone: %d | email: %s | endereco: %s\n", nome, telefone, email, endereco);
     }
 
     fclose(arq);
@@ -28,37 +29,29 @@ void escreveAgenda() {
     char email[100];
     char endereco[150];
 
-    printf("\n=== Cadastrar Contato ===\n");
+    printf("\n=== cadastrar contato ===\n");
 
-    printf("Nome: ");
+    printf("nome: ");
     scanf(" %[^\n]", nome);
-    printf("Telefone: ");
+    printf("telefone: ");
     scanf("%d", &telefone);
-    getchar(); 
-    printf("Email: ");
+    getchar(); // limpa buffer
+    printf("email: ");
     scanf(" %[^\n]", email);
-    printf("Endereco: ");
+    printf("endereco: ");
     scanf(" %[^\n]", endereco);
 
     FILE *arq = fopen("agenda.txt", "a");
     if (arq == NULL) {
-        perror("Erro ao abrir o arquivo.\n");
+        perror("erro ao abrir arquivo\n");
         return;
     }
 
+    // escreve contato no arquivo
     fprintf(arq, "%s;%d;%s;%s\n", nome, telefone, email, endereco);
     fclose(arq);
 
-    printf("Contato cadastrado com sucesso!\n");
-}
-
-void menuAtualiza() {
-    printf("O que você quer atualizar?\n");
-    printf("1 - Nome\n");
-    printf("2 - Telefone\n");
-    printf("3 - Email\n");
-    printf("4 - Endereco\n");
-    printf("0 - Sair\n");
+    printf("contato cadastrado com sucesso\n");
 }
 
 void atualizaContato() {
@@ -71,29 +64,31 @@ void atualizaContato() {
 
     FILE *arq = fopen("agenda.txt", "r");
     if (arq == NULL) {
-        perror("Erro ao abrir o arquivo.\n");
+        perror("erro ao abrir arquivo\n");
         return;
     }
 
     FILE *temp = fopen("temp.txt", "w");
     if (temp == NULL) {
-        perror("Erro ao criar arquivo temporário.\n");
+        perror("erro ao criar arquivo temporario\n");
         fclose(arq);
         return;
     }
 
-    printf("\n=== Atualizar Contato ===\n");
+    printf("\n=== atualizar contato ===\n");
 
+    // lista contatos para usuario escolher
     while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF) {
-        printf("%d - Nome: %s | Telefone: %d | Email: %s | Endereco: %s\n",
+        printf("%d - nome: %s | telefone: %d | email: %s | endereco: %s\n",
                contador, nome, telefone, email, endereco);
         contador++;
     }
 
-    printf("Escolha uma linha para atualizar: ");
+    printf("escolha linha para atualizar: ");
     scanf("%d", &linha);
-    getchar(); 
+    getchar(); // limpa buffer
 
+    // encontra contato selecionado
     rewind(arq);
     contador = 1;
     while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF) {
@@ -108,40 +103,41 @@ void atualizaContato() {
 
     int opcao;
     while (1) {
-        printf("\n=== Menu de Atualizacao ===\n");
-        printf("1 - Atualizar nome\n");
-        printf("2 - Atualizar telefone\n");
-        printf("3 - Atualizar email\n");
-        printf("4 - Atualizar endereco\n");
-        printf("0 - Salvar e sair\n");
-        printf("Escolha uma opcao: ");
+        printf("\n=== menu atualizacao ===\n");
+        printf("1 - atualizar nome\n");
+        printf("2 - atualizar telefone\n");
+        printf("3 - atualizar email\n");
+        printf("4 - atualizar endereco\n");
+        printf("0 - salvar e sair\n");
+        printf("escolha opcao: ");
         scanf("%d", &opcao);
-        getchar(); 
+        getchar(); // limpa buffer
 
         if (opcao == 1) {
-            printf("Novo nome: ");
+            printf("novo nome: ");
             scanf("%[^\n]", nomeNovo);
             getchar();
         } else if (opcao == 2) {
-            printf("Novo telefone: ");
+            printf("novo telefone: ");
             scanf("%d", &telefoneNovo);
             getchar();
         } else if (opcao == 3) {
-            printf("Novo email: ");
+            printf("novo email: ");
             scanf("%[^\n]", emailNovo);
             getchar();
         } else if (opcao == 4) {
-            printf("Novo endereco: ");
+            printf("novo endereco: ");
             scanf("%[^\n]", enderecoNovo);
             getchar();
         } else if (opcao == 0) {
-            printf("Salvando as informacoes...\n");
+            printf("salvando informacoes...\n");
             break;
         } else {
-            printf("Opcao invalida.\n");
+            printf("opcao invalida\n");
         }
     }
 
+    // reescreve arquivo com contato atualizado
     rewind(arq);
     contador = 1;
     while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF) {
@@ -158,24 +154,24 @@ void atualizaContato() {
     remove("agenda.txt");
     rename("temp.txt", "agenda.txt");
 
-    printf("Linha %d atualizada com sucesso!\n", linha);
+    printf("linha %d atualizada com sucesso\n", linha);
 }
 
 void removeContato() {
     char nome[50];
-    printf("\n=== Remover Contato ===\n");
-    printf("Digite o nome do contato: ");
+    printf("\n=== remover contato ===\n");
+    printf("digite nome do contato: ");
     scanf(" %[^\n]", nome);
 
     FILE *arq = fopen("agenda.txt", "r");
     if (arq == NULL) {
-        perror("Erro ao abrir o arquivo.\n");
+        perror("erro ao abrir arquivo\n");
         return;
     }
 
     FILE *temp = fopen("temp.txt", "w");
     if (temp == NULL) {
-        perror("Erro ao criar arquivo temporario.\n");
+        perror("erro ao criar arquivo temporario\n");
         fclose(arq);
         return;
     }
@@ -184,6 +180,7 @@ void removeContato() {
     int telefoneArq;
     int encontrado = 0;
 
+    // copia todos contatos exceto o removido
     while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nomeArq, &telefoneArq, emailArq, enderecoArq) != EOF) {
         if (strcmp(nomeArq, nome) != 0)
             fprintf(temp, "%s;%d;%s;%s\n", nomeArq, telefoneArq, emailArq, enderecoArq);
@@ -197,10 +194,10 @@ void removeContato() {
     if (encontrado) {
         remove("agenda.txt");
         rename("temp.txt", "agenda.txt");
-        printf("Contato removido com sucesso!\n");
+        printf("contato removido com sucesso\n");
     } else {
         remove("temp.txt");
-        printf("Contato nao encontrado.\n");
+        printf("contato nao encontrado\n");
     }
 }
 
@@ -209,49 +206,50 @@ void buscaContato() {
     char nome[50], email[100], endereco[150];
     int telefone, encontrado = 0, opcao;
 
-    printf("\n=== Buscar Contato ===\n");
-    printf("1 - Nome\n2 - Telefone\n3 - Email\n4 - Endereco\n");
-    printf("Escolha: ");
+    printf("\n=== buscar contato ===\n");
+    printf("1 - nome\n2 - telefone\n3 - email\n4 - endereco\n");
+    printf("escolha: ");
     scanf("%d", &opcao);
     getchar();
 
     FILE *arq = fopen("agenda.txt", "r");
     if (arq == NULL) {
-        perror("Erro ao abrir o arquivo.\n");
+        perror("erro ao abrir arquivo\n");
         return;
     }
 
+    // busca por criterio escolhido
     if (opcao == 1) {
-        printf("Nome: ");
+        printf("nome: ");
         scanf(" %[^\n]", nomeBusca);
         while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF)
             if (strcmp(nome, nomeBusca) == 0)
-                printf("Encontrado: %s | %d | %s | %s\n", nome, telefone, email, endereco), encontrado = 1;
+                printf("encontrado: %s | %d | %s | %s\n", nome, telefone, email, endereco), encontrado = 1;
     } else if (opcao == 2) {
-        printf("Telefone: ");
+        printf("telefone: ");
         scanf(" %[^\n]", telefoneBusca);
         while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF) {
             char telStr[15];
             sprintf(telStr, "%d", telefone);
             if (strcmp(telStr, telefoneBusca) == 0)
-                printf("Encontrado: %s | %d | %s | %s\n", nome, telefone, email, endereco), encontrado = 1;
+                printf("encontrado: %s | %d | %s | %s\n", nome, telefone, email, endereco), encontrado = 1;
         }
     } else if (opcao == 3) {
-        printf("Email: ");
+        printf("email: ");
         scanf(" %[^\n]", emailBusca);
         while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF)
             if (strcmp(email, emailBusca) == 0)
-                printf("Encontrado: %s | %d | %s | %s\n", nome, telefone, email, endereco), encontrado = 1;
+                printf("encontrado: %s | %d | %s | %s\n", nome, telefone, email, endereco), encontrado = 1;
     } else if (opcao == 4) {
-        printf("Endereco: ");
+        printf("endereco: ");
         scanf(" %[^\n]", enderecoBusca);
         while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF)
             if (strcmp(endereco, enderecoBusca) == 0)
-                printf("Encontrado: %s | %d | %s | %s\n", nome, telefone, email, endereco), encontrado = 1;
+                printf("encontrado: %s | %d | %s | %s\n", nome, telefone, email, endereco), encontrado = 1;
     }
 
     if (!encontrado)
-        printf("Contato nao encontrado.\n");
+        printf("contato nao encontrado\n");
 
     fclose(arq);
 }
@@ -259,7 +257,7 @@ void buscaContato() {
 void contataContatos() {
     FILE *arq = fopen("agenda.txt", "r");
     if (arq == NULL) {
-        perror("Erro ao abrir o arquivo.\n");
+        perror("erro ao abrir arquivo\n");
         return;
     }
 
@@ -267,20 +265,21 @@ void contataContatos() {
     char nome[50], email[100], endereco[150];
     int telefone;
 
+    // conta total de contatos
     while (fscanf(arq, "%49[^;];%d;%99[^;];%149[^\n]\n", nome, &telefone, email, endereco) != EOF)
         count++;
 
     fclose(arq);
-    printf("\nTotal de contatos: %d\n", count);
+    printf("\ntotal de contatos: %d\n", count);
 }
 
 void exibeMenu() {
-    printf("\n=== Menu de Contatos ===\n");
-    printf("1 - Cadastrar\n");
-    printf("2 - Buscar\n");
-    printf("3 - Atualizar\n");
-    printf("4 - Remover\n");
-    printf("5 - Listar todos\n");
-    printf("6 - Total de contatos\n");
-    printf("0 - Sair\n");
+    printf("\n=== menu de contatos ===\n");
+    printf("1 - cadastrar\n");
+    printf("2 - buscar\n");
+    printf("3 - atualizar\n");
+    printf("4 - remover\n");
+    printf("5 - listar todos\n");
+    printf("6 - total de contatos\n");
+    printf("0 - sair\n");
 }
